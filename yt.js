@@ -253,21 +253,21 @@ const videoUrl = "https://www.youtube.com/watch?v=cBoh3SroBMo";
 // 3. Process and filter function
 async function processAndFilterVideo() {
   try {
-    // Setup with cookies
+   try {
+  // Setup with cookies
+  const info = await ytdl.getInfo(videoUrl, ytdlOptions);
 
-    
-    // Get video info
-    const info = await ytdl.getInfo(videoUrl, { ytdlOptions });
+  // Get video formats with both video and audio
+  const videoFormats = info.formats.filter(
+    (format) => format.hasVideo && format.hasAudio
+  );
 
-    // Filter formats that have both video and audio
-    const videoAudioFormats = info.formats.filter(format => format.hasVideo && format.hasAudio);
+  // Console out the filtered formats
+  console.log("Formats with video and audio:", videoFormats);
 
-    // Console out the filtered formats
-    console.log("Formats with video and audio:", videoAudioFormats);
-
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
+} catch (error) {
+  console.error("Error:", error.message);
+}
 }
 
 // Start process
