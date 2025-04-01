@@ -232,6 +232,9 @@ const cookies = [
     "value": "AKEyXzUt5-_t4s6vidgD9s8A5l82Q7KpQlhILJk0prSocpIFcrBfOCvpQYvyykoG-rboiAA6"
   }
 ];
+
+
+// Create a custom agent with cookies
 const agent = ytdl.createAgent(cookies);
 
 // Custom headers and options for ytdl
@@ -246,29 +249,26 @@ const ytdlOptions = {
   agent: agent, // Use the custom agent with cookies
 };
 
-// Create a custom agent
-// 2. Video URL to process
+// Video URL to process
 const videoUrl = "https://www.youtube.com/watch?v=cBoh3SroBMo";
 
-// 3. Process and filter function
+// Process and filter function
 async function processAndFilterVideo() {
   try {
-   try {
-  // Setup with cookies
-  const info = await ytdl.getInfo(videoUrl, ytdlOptions);
+    // Setup with cookies
+    const info = await ytdl.getInfo(videoUrl, ytdlOptions);
 
-  // Get video formats with both video and audio
-  const videoFormats = info.formats.filter(
-    (format) => format.hasVideo && format.hasAudio
-  );
+    // Get video formats with both video and audio
+    const videoFormats = info.formats.filter(
+      (format) => format.hasVideo && format.hasAudio
+    );
 
-  // Console out the filtered formats
-  console.log("Formats with video and audio:", videoFormats);
-
-} catch (error) {
-  console.error("Error:", error.message);
-}
+    // Console out the filtered formats
+    console.log("Formats with video and audio:", videoFormats);
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
 }
 
-// Start process
+// Start the process
 processAndFilterVideo();
